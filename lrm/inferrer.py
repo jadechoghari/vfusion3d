@@ -24,7 +24,8 @@ import kiui
 
 class LRMInferrer:
     def __init__(self, model_name: str, resume:str):
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device('cpu')  # Force to use CPU
         _model_kwargs = {'camera_embed_dim': 1024, 'rendering_samples_per_ray': 128, 'transformer_dim': 1024, 'transformer_layers': 16, 'transformer_heads': 16, 'triplane_low_res': 32, 'triplane_high_res': 64, 'triplane_dim': 80, 'encoder_freeze': False}
         
         self.model = self._build_model(_model_kwargs).eval().to(self.device)
@@ -188,7 +189,8 @@ class LRMInferrer:
         save_image(image, os.path.join(dump_path, f'{uid}.png'))
         
         results = self.infer_single(
-            image.cuda(),
+            # image.cuda(),
+            image.cpu(),
             render_size=render_size,
             mesh_size=mesh_size,
             export_video=export_video,
@@ -238,7 +240,7 @@ if __name__ == '__main__':
     images.extend(glob.glob(os.path.join(source_path, "*.jpeg")))
 
     with LRMInferrer(model_name=args.model_name, resume=args.resume) as inferrer:
-        with torch.autocast(device_type="cuda", cache_enabled=False, dtype=torch.float32):
+        with torch.autocast(device_type="cpu", cache_enabled=False, dtype=torch.float32):
             for img in images:
                 inferrer.infer(
                     source_image=img,
