@@ -25,15 +25,15 @@ class LRMGeneratorConfig(PretrainedConfig):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.camera_embed_dim = kwargs.get("camera_embed_dim", 256)
-        self.rendering_samples_per_ray = kwargs.get("rendering_samples_per_ray", 64)
-        self.transformer_dim = kwargs.get("transformer_dim", 512)
-        self.transformer_layers = kwargs.get("transformer_layers", 6)
-        self.transformer_heads = kwargs.get("transformer_heads", 8)
+        self.camera_embed_dim = kwargs.get("camera_embed_dim", 1024)
+        self.rendering_samples_per_ray = kwargs.get("rendering_samples_per_ray", 128)
+        self.transformer_dim = kwargs.get("transformer_dim", 1024)
+        self.transformer_layers = kwargs.get("transformer_layers", 16)
+        self.transformer_heads = kwargs.get("transformer_heads", 16)
         self.triplane_low_res = kwargs.get("triplane_low_res", 32)
         self.triplane_high_res = kwargs.get("triplane_high_res", 128)
         self.triplane_dim = kwargs.get("triplane_dim", 256)
-        self.encoder_freeze = kwargs.get("encoder_freeze", True)
+        self.encoder_freeze = kwargs.get("encoder_freeze", False)
         self.encoder_model_name = kwargs.get("encoder_model_name", 'facebook/dinov2-base')
         self.encoder_feat_dim = kwargs.get("encoder_feat_dim", 768)
 
