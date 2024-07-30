@@ -1,0 +1,15 @@
+{
+    "camera_embed_dim": 256,
+    "rendering_samples_per_ray": 64,
+    "transformer_dim": 512,
+    "transformer_layers": 6,
+    "transformer_heads": 8,
+    "triplane_low_res": 32,
+    "triplane_high_res": 128,
+    "triplane_dim": 256,
+    "encoder_freeze": true,
+    "encoder_model_name": "facebook/dinov2-base",
+    "encoder_feat_dim": 768,
+    "model_type": "lrm_generator"
+  }
+  
